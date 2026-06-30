@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jagruti Jiralikar — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0F2545;
+    --navy-deep: #081A33;
+    --code-bg: #0A1B33;
+    --cyan: #7EC8E3;
+    --amber: #FFB454;
+    --paper: #F6F8FA;
+    --ink: #15202B;
+    --ink-soft: #5A6B7A;
+    --line: rgba(126,200,227,0.25);
+    --radius: 12px;
+    --max: 1100px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    font-family:'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; line-height:1.15; }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+
+  .wrap{ max-width: var(--max); margin:0 auto; padding:0 24px; }
+
+  @keyframes fadeUp{ from{ opacity:0; transform: translateY(16px); } to{ opacity:1; transform:none; } }
+  .load-in{ opacity:0; animation: fadeUp .7s ease forwards; }
+  .d1{ animation-delay: .05s; } .d2{ animation-delay: .18s; }
+  .d3{ animation-delay: .31s; } .d4{ animation-delay: .44s; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky; top:0; z-index:50;
+    background: rgba(246,248,250,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width: var(--max); margin:0 auto; padding:16px 24px;
+  }
+  .logo{ font-weight:700; font-size:1.15rem; color: var(--navy); }
+  .logo span{ color: var(--amber); }
+  .nav-links{ display:flex; gap:30px; list-style:none; align-items:center; }
+  .nav-links a{ position:relative; font-size:0.92rem; font-weight:500; color: var(--ink-soft); transition: color .2s; }
+  .nav-links a:not(.nav-cta)::after{
+    content:""; position:absolute; left:0; bottom:-6px;
+    width:0; height:2px; background: var(--amber);
+    transition: width .25s;
+  }
+  .nav-links a:not(.nav-cta):hover{ color: var(--navy); }
+  .nav-links a:not(.nav-cta):hover::after{ width:100%; }
+  .nav-links .nav-cta{
+    background: var(--navy); color: var(--paper) !important;
+    padding: 8px 16px; border-radius: 999px; font-size:0.85rem; font-weight:600;
+    transition: background .2s;
+  }
+  .nav-links .nav-cta:hover{ background: var(--navy-deep); }
+  .menu-btn{ display:none; background:none; border:none; font-size:1.4rem; color:var(--navy); cursor:pointer; }
+
+  /* ---------- HERO (blueprint grid) ---------- */
+  .hero{
+    position: relative;
+    overflow: hidden;
+    background: var(--navy);
+    color: var(--paper);
+    padding: 90px 24px 70px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(15,37,69,0) 0%, var(--navy) 80%);
+  }
+  .hero-grid{
+    position: relative; z-index:2;
+    max-width: var(--max); margin:0 auto;
+    display:grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    align-items:center;
+  }
+  .hero-left{ text-align:left; }
+
+  .eyebrow-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    border: 1px solid rgba(126,200,227,0.4);
+    color: var(--cyan);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    margin-bottom: 24px;
+  }
+  .eyebrow-tag .dot{ width:6px; height:6px; border-radius:50%; background: var(--amber); }
+  @keyframes pulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(255,180,84,0.5);} 50%{ box-shadow:0 0 0 4px rgba(255,180,84,0);} }
+  .eyebrow-tag .dot{ animation: pulse 2s infinite; }
+
+  .hero h1{
+    font-size: clamp(2.3rem, 5vw, 3.6rem);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .hero .role{
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: var(--cyan);
+    margin-bottom: 20px;
+  }
+  .hero p.intro{
+    max-width: 480px; margin: 0 0 32px;
+    color: rgba(246,248,250,0.78);
+    font-size: 1rem;
+  }
+
+  .contact-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .pill{
+    display:flex; align-items:center; gap:8px;
+    background: rgba(246,248,250,0.06);
+    border: 1px solid rgba(246,248,250,0.18);
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    transition: border-color .2s, transform .2s;
+  }
+  .pill:hover{ border-color: var(--amber); transform: translateY(-2px); }
+  .pill.primary{ background: var(--amber); color: var(--navy-deep); border-color: var(--amber); font-weight:600; }
+  .pill svg{ width:16px; height:16px; }
+
+  /* ---------- CODE PANEL (signature element) ---------- */
+  .code-panel{
+    background: var(--code-bg);
+    border: 1px solid rgba(126,200,227,0.22);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 30px 70px rgba(2,8,20,0.55);
+  }
+  .code-topbar{
+    display:flex; align-items:center; gap:7px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .code-topbar .tdot{ width:10px; height:10px; border-radius:50%; }
+  .code-topbar .tdot.r{ background:#FF6464; }
+  .code-topbar .tdot.y{ background:#FFC857; }
+  .code-topbar .tdot.g{ background:#5FD068; }
+  .code-topbar .filename{ margin-left:10px; font-size:0.72rem; color: rgba(246,248,250,0.45); }
+  .code-body{
+    padding: 22px 24px;
+    font-size: 0.84rem;
+    line-height: 1.95;
+    color: #B9C8DA;
+    overflow-x: auto;
+  }
+  .code-body .ln{ display:inline-block; width:20px; color: rgba(255,255,255,0.22); user-select:none; }
+  .code-body .kw{ color: var(--cyan); }
+  .code-body .vr{ color: #E8EDF3; font-weight:600; }
+  .code-body .ky{ color: var(--amber); }
+  .code-body .st{ color: #9FE3C8; }
+  .code-body .cursor{ color: var(--amber); animation: blink 1s steps(2) infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* ---------- STATS STRIP ---------- */
+  .stats-strip{
+    background: white;
+    border-bottom: 1px solid var(--line);
+    padding: 36px 24px;
+    display:flex;
+    justify-content:center;
+    gap: 0;
+    max-width: var(--max);
+    margin: 0 auto;
+  }
+  .stat{
+    flex:1;
+    text-align:center;
+    padding: 0 24px;
+    border-left: 1px solid rgba(15,37,69,0.1);
+  }
+  .stat:first-child{ border-left:none; }
+  .stat .num-big{ display:block; font-size: 1.9rem; color: var(--navy); font-weight:600; margin-bottom:4px; }
+  .stat .label{ font-size: 0.82rem; color: var(--ink-soft); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{ margin-bottom: 44px; }
+  .section-head .num{ color: var(--amber); font-size: 0.8rem; display:block; margin-bottom:8px; }
+  .section-head h2{ font-size: clamp(1.6rem, 3vw, 2.1rem); color: var(--navy); }
+
+  /* ---------- ABOUT ---------- */
+  .about{ padding: 84px 24px; }
+  .about-grid{
+    display:grid; grid-template-columns: 1fr 1.4fr; gap: 48px;
+    max-width: var(--max); margin: 0 auto; align-items:start;
+  }
+  .about-card{
+    background: var(--navy); color: var(--paper);
+    border-radius: var(--radius); padding: 28px; position: relative;
+  }
+  .about-card::before, .about-card::after{
+    content:""; position:absolute; width:18px; height:18px; border: 2px solid var(--amber);
+  }
+  .about-card::before{ top:8px; left:8px; border-right:none; border-bottom:none; }
+  .about-card::after{ bottom:8px; right:8px; border-left:none; border-top:none; }
+  .about-card .avatar{
+    width: 64px; height:64px; border-radius:50%;
+    background: var(--cyan); color: var(--navy-deep);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem;
+    margin-bottom: 18px;
+  }
+  .about-card h3{ font-size:1.1rem; margin-bottom:6px; }
+  .about-card .status{ color: var(--cyan); font-size:0.85rem; margin-bottom: 18px; }
+  .about-card .meta-row{ display:flex; justify-content:space-between; font-size:0.82rem; padding: 10px 0; border-top: 1px solid rgba(246,248,250,0.12); }
+  .about-card .meta-row span:first-child{ color: rgba(246,248,250,0.6); }
+  .about-text p{ color: var(--ink-soft); margin-bottom: 16px; font-size: 1rem; }
+  .about-text p:last-child{ margin-bottom:0; }
+
+  /* ---------- SKILLS ---------- */
+  .skills{ background: white; padding: 84px 24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .skill-groups{ max-width: var(--max); margin:0 auto; display:flex; flex-direction:column; gap:28px; }
+  .group-label{ display:block; color: var(--amber); font-size:0.75rem; letter-spacing:0.06em; margin-bottom:12px; }
+  .skill-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .skill-chip{
+    padding: 9px 16px; border-radius: 8px; font-size: 0.88rem;
+    color: var(--navy); background: var(--paper);
+    border: 1px solid rgba(15,37,69,0.13);
+    transition: border-color .2s, background .2s;
+  }
+  .skill-chip:hover{ border-color: var(--cyan); background: rgba(126,200,227,0.08); }
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .certifications{ padding: 84px 24px; }
+  .cert-list{ max-width: var(--max); margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  .cert-item{
+    display:flex; align-items:center; gap:22px;
+    background:white; border:1px solid rgba(15,37,69,0.1);
+    border-radius: 10px; padding: 18px 24px;
+    transition: border-color .2s, transform .2s;
+  }
+  .cert-item:hover{ border-color: var(--cyan); transform: translateX(4px); }
+  .cert-date{ font-size:0.78rem; color: var(--amber); white-space:nowrap; width:84px; flex-shrink:0; }
+  .cert-divider{ width:1px; height:30px; background: rgba(15,37,69,0.15); flex-shrink:0; }
+  .cert-info h4{ font-size:1rem; color: var(--navy); font-weight:600; margin-bottom:3px; }
+  .cert-info p{ font-size:0.85rem; color: var(--ink-soft); }
+  @media (max-width: 600px){
+    .cert-item{ flex-wrap:wrap; }
+    .cert-divider{ display:none; }
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects{ padding: 84px 24px; }
+  .project-list{ display:grid; gap: 22px; max-width: var(--max); margin: 0 auto; }
+  .project-card{
+    border: 1px solid rgba(15,37,69,0.12);
+    border-radius: var(--radius);
+    padding: 30px; background: white;
+    display:grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+  }
+  .project-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(15,37,69,0.1);
+    border-color: rgba(126,200,227,0.5);
+  }
+  .project-icon{
+    width:42px; height:42px; border-radius:10px;
+    background: rgba(126,200,227,0.16); color: var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 16px;
+  }
+  .project-icon svg{ width:20px; height:20px; }
+  .project-card .pindex{ color: var(--amber); font-size:0.8rem; display:block; margin-bottom:8px; }
+  .project-card h3{ font-size:1.25rem; color: var(--navy); margin-bottom:10px; }
+  .project-card p{ color: var(--ink-soft); font-size:0.95rem; margin-bottom: 16px; max-width: 520px; }
+  .stack-row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .stack-tag{ font-size:0.75rem; padding: 4px 10px; border-radius: 6px; background: rgba(126,200,227,0.15); color: var(--navy); }
+  .project-link{
+    align-self:center; border: 1px solid var(--navy); color: var(--navy);
+    padding: 9px 18px; border-radius: 999px; font-size: 0.85rem; font-weight:600;
+    white-space: nowrap; transition: background .2s, color .2s;
+  }
+  .project-link:hover{ background: var(--navy); color: var(--paper); }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-cta{ background: var(--navy); color: var(--paper); padding: 80px 24px; text-align:center; }
+  .contact-cta h2{ font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom:16px; }
+  .contact-cta p{ color: rgba(246,248,250,0.75); max-width:480px; margin:0 auto 32px; }
+  .contact-cta .contact-row{ justify-content:center; }
+  footer{ background: var(--navy-deep); color: rgba(246,248,250,0.55); padding: 22px 24px; text-align:center; font-size:0.82rem; }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{ opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; } }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .hero-left{ text-align:left; }
+    .stats-strip{ flex-wrap:wrap; }
+    .stat{ flex:1 1 50%; border-left:none; margin-bottom:16px; }
+  }
+  @media (max-width: 760px){
+    .about-grid{ grid-template-columns: 1fr; }
+    .project-card{ grid-template-columns: 1fr; }
+    .project-link{ justify-self:start; }
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0; background: var(--paper);
+      flex-direction:column; align-items:flex-start; padding: 18px 24px; gap:16px;
+      display:none; border-bottom:1px solid var(--line);
+    }
+    .nav-links.open{ display:flex; }
+    .menu-btn{ display:block; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo">Jagruti<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="mailto:jiralikarjagruti@gmail.com" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <span class="eyebrow-tag load-in d1"><span class="dot"></span> Open to internships &amp; projects</span>
+      <h1 class="load-in d2">Jagruti Jiralikar</h1>
+      <p class="role load-in d2">B.Tech CSE Student (2nd Year Completed) · Web Developer</p>
+      <p class="intro load-in d3">I build practical, real-world web and database applications — from clinic booking systems to complaint management tools. Currently sharpening my front-end skills through the OIBSIP internship.</p>
+      <div class="contact-row load-in d4">
+        <a href="mailto:jiralikarjagruti@gmail.com" class="pill primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+          Email me
+        </a>
+        <a href="https://www.linkedin.com/in/jagruti-jiralikar-9242a9362" target="_blank" rel="noopener" class="pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5.001A2.5 2.5 0 014.98 3.5zM3 9h4v12H3V9zm6 0h3.8v1.7h.05c.53-1 1.83-1.7 3.15-1.7C19.8 9 21 11.1 21 14.1V21h-4v-6.1c0-1.45-.5-2.45-1.8-2.45-1 0-1.6.7-1.85 1.35-.1.25-.12.6-.12.95V21H9V9z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/jiralikarjagruti-svg" target="_blank" rel="noopener" class="pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.1 6.9 9.4.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.1-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.5-1.2.1-2.6 0 0 .8-.3 2.7 1 .8-.2 1.6-.3 2.5-.3s1.7.1 2.5.3c1.9-1.3 2.7-1 2.7-1 .6 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.6 4.9.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5C19.1 20.1 22 16.4 22 12c0-5.5-4.5-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="code-panel load-in d3">
+      <div class="code-topbar">
+        <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+        <span class="filename mono">jagruti.js</span>
+      </div>
+      <pre class="code-body mono"><code><span class="ln">1</span><span class="kw">const</span> <span class="vr">jagruti</span> = {
+<span class="ln">2</span>  <span class="ky">role</span>: <span class="st">"B.Tech CSE Student"</span>,
+<span class="ln">3</span>  <span class="ky">year</span>: <span class="st">"2nd Year Completed"</span>,
+<span class="ln">4</span>  <span class="ky">skills</span>: [<span class="st">"HTML"</span>, <span class="st">"CSS"</span>, <span class="st">"JS"</span>, <span class="st">"Java"</span>, <span class="st">"SQL"</span>],
+<span class="ln">5</span>  <span class="ky">building</span>: <span class="st">"OIBSIP Web Dev Internship"</span>,
+<span class="ln">6</span>  <span class="ky">status</span>: <span class="st">"open to opportunities"</span><span class="cursor">▌</span>
+<span class="ln">7</span>};</code></pre>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat">
+    <span class="num-big mono">03</span>
+    <span class="label">Projects built</span>
+  </div>
+  <div class="stat">
+    <span class="num-big mono">04</span>
+    <span class="label">Certifications earned</span>
+  </div>
+  <div class="stat">
+    <span class="num-big mono">06+</span>
+    <span class="label">Languages &amp; tools</span>
+  </div>
+  <div class="stat">
+    <span class="num-big mono">2nd</span>
+    <span class="label">Year · B.Tech CSE</span>
+  </div>
+</div>
+
+<section class="about reveal" id="about">
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="avatar">JJ</div>
+      <h3>Jagruti Uday Jiralikar</h3>
+      <p class="status">● Currently learning web development</p>
+      <div class="meta-row"><span>Education</span><span>B.Tech CSE, 2nd Yr completed</span></div>
+      <div class="meta-row"><span>Focus</span><span>Web Dev & DBMS</span></div>
+      <div class="meta-row"><span>Based in</span><span>India</span></div>
+    </div>
+    <div class="about-text">
+      <div class="section-head">
+        <span class="num mono">01 / about</span>
+        <h2>A bit about me</h2>
+      </div>
+      <p>I'm a B.Tech CSE student who likes turning real, everyday problems into working applications — whether that's helping a dental clinic manage appointments or giving college students a clear way to raise complaints.</p>
+      <p>Alongside coursework, I've worked on database-driven systems using Java and SQL, and I'm currently building on my HTML, CSS, and JavaScript skills through the Oasis Infobyte Web Development internship.</p>
+      <p>I'm always open to internship opportunities, collaborative projects, or just a chat about web development — feel free to reach out.</p>
+    </div>
+  </div>
+</section>
+
+<section class="skills reveal" id="skills">
+  <div class="section-head">
+    <span class="num mono">02 / skills</span>
+    <h2>What I work with</h2>
+  </div>
+  <div class="skill-groups">
+    <div class="skill-group">
+      <span class="group-label mono">LANGUAGES</span>
+      <div class="skill-row">
+        <div class="skill-chip">C</div>
+        <div class="skill-chip">C++</div>
+        <div class="skill-chip">Java</div>
+        <div class="skill-chip">Python</div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <span class="group-label mono">WEB DEVELOPMENT</span>
+      <div class="skill-row">
+        <div class="skill-chip">HTML5</div>
+        <div class="skill-chip">CSS3</div>
+        <div class="skill-chip">JavaScript</div>
+        <div class="skill-chip">Responsive Design</div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <span class="group-label mono">TOOLS &amp; CONCEPTS</span>
+      <div class="skill-row">
+        <div class="skill-chip">SQL / DBMS</div>
+        <div class="skill-chip">Git &amp; GitHub</div>
+        <div class="skill-chip">Problem Solving</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="certifications reveal" id="certifications">
+  <div class="section-head">
+    <span class="num mono">03 / certifications</span>
+    <h2>Courses &amp; certifications</h2>
+  </div>
+  <div class="cert-list">
+    <div class="cert-item">
+      <span class="cert-date mono">JUN 2026</span>
+      <span class="cert-divider"></span>
+      <div class="cert-info">
+        <h4>Apply AI: Analyze Customer Reviews</h4>
+        <p>MIT Academy of Engineering, Alandi Pune · Cisco Networking Academy</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-date mono">JUN 2026</span>
+      <span class="cert-divider"></span>
+      <div class="cert-info">
+        <h4>Data Analytics Essentials</h4>
+        <p>MIT Academy of Engineering, Alandi Pune · Cisco Networking Academy</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-date mono">JUN 2026</span>
+      <span class="cert-divider"></span>
+      <div class="cert-info">
+        <h4>JavaScript Essentials 1</h4>
+        <p>Cisco Networking Academy</p>
+      </div>
+    </div>
+    <div class="cert-item">
+      <span class="cert-date mono">JUN 2026</span>
+      <span class="cert-divider"></span>
+      <div class="cert-info">
+        <h4>JavaScript Essentials 2</h4>
+        <p>Cisco Networking Academy</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects reveal" id="projects">
+  <div class="section-head">
+    <span class="num mono">04 / projects</span>
+    <h2>Things I've built</h2>
+  </div>
+  <div class="project-list">
+
+    <div class="project-card">
+      <div>
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <span class="pindex mono">PROJECT 01</span>
+        <h3>Dental Care Website</h3>
+        <p>A website for a dental clinic with service listings, doctor information, and an appointment booking form so patients can request visits online instead of calling in.</p>
+        <div class="stack-row">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+        </div>
+      </div>
+      <a href="https://github.com/jiralikarjagruti-svg" target="_blank" rel="noopener" class="project-link">View Code →</a>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3v18"/><path d="M5 4h11l-2 4 2 4H5"/></svg>
+        </div>
+        <span class="pindex mono">PROJECT 02</span>
+        <h3>Online College Complaint Management System</h3>
+        <p>A Java-based system that lets students log complaints and track their status, while giving admins a panel to review, update, and resolve issues — backed by a SQL database for storing and managing all complaint records.</p>
+        <div class="stack-row">
+          <span class="stack-tag">Java</span>
+          <span class="stack-tag">SQL</span>
+        </div>
+      </div>
+      <a href="https://github.com/jiralikarjagruti-svg" target="_blank" rel="noopener" class="project-link">View Code →</a>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><path d="M14.5 15.2c2.3.2 4.5 1.5 4.5 4.3"/></svg>
+        </div>
+        <span class="pindex mono">PROJECT 03</span>
+        <h3>Employee Management System (DBMS)</h3>
+        <p>A Java application built for DBMS coursework to manage employee records, departments, and basic payroll details, with create, update, and delete operations connected to a SQL database.</p>
+        <div class="stack-row">
+          <span class="stack-tag">Java</span>
+          <span class="stack-tag">SQL</span>
+          <span class="stack-tag">DBMS</span>
+        </div>
+      </div>
+      <a href="https://github.com/jiralikarjagruti-svg" target="_blank" rel="noopener" class="project-link">View Code →</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="contact-cta reveal" id="contact">
+  <h2>Let's connect</h2>
+  <p>Open to internship opportunities, project collaborations, or just talking web development.</p>
+  <div class="contact-row">
+    <a href="mailto:jiralikarjagruti@gmail.com" class="pill primary">jiralikarjagruti@gmail.com</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Jagruti Jiralikar. Built as part of the OIBSIP Web Development internship.
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
