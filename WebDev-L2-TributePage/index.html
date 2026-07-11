@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikola Tesla — A Tribute by Jagruti Jiralikar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020812;
+  --navy:#050F24;
+  --mid:#0A1932;
+  --card:#0D1F3C;
+  --e:#00D4FF;
+  --e2:#0099CC;
+  --gold:#F0C040;
+  --red:#FF4444;
+  --text:#E8EDF8;
+  --soft:#6A7F9A;
+  --max:960px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+::selection{background:rgba(0,212,255,0.3);}
+h1,h2,h3,blockquote{font-family:'Cormorant Garamond',serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+:focus-visible{outline:2px solid var(--e);outline-offset:3px;}
+
+/* ===================== CANVAS ===================== */
+#canvas{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ===================== HERO ===================== */
+.hero{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:40px 24px 80px;
+}
+.hero-content{position:relative;z-index:2;max-width:760px;}
+
+.oibsip-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(0,212,255,0.25);
+  background:rgba(0,212,255,0.05);
+  color:var(--e);
+  padding:6px 16px;
+  border-radius:999px;
+  font-size:0.7rem;
+  letter-spacing:0.08em;
+  margin-bottom:40px;
+}
+.oibsip-badge .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--e);
+  animation:pulse 1.8s ease-in-out infinite;
+  box-shadow:0 0 6px var(--e);
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+
+/* portrait ring */
+.portrait-wrap{
+  position:relative;
+  width:180px;height:180px;
+  margin:0 auto 32px;
+}
+.portrait-ring{
+  position:absolute;inset:-8px;
+  border-radius:50%;
+  border:2px solid transparent;
+  background:conic-gradient(var(--e),#0050FF,var(--e)) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;
+  mask-composite:exclude;
+  animation:spin 6s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.portrait-ring2{
+  position:absolute;inset:-16px;
+  border-radius:50%;
+  border:1px solid rgba(0,212,255,0.2);
+  animation:spin 12s linear infinite reverse;
+}
+.portrait-inner{
+  width:100%;height:100%;
+  border-radius:50%;
+  background:linear-gradient(135deg,#0A1932,#0D2A50);
+  border:2px solid rgba(0,212,255,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:5.5rem;
+  box-shadow:0 0 40px rgba(0,212,255,0.25),0 0 80px rgba(0,212,255,0.1),inset 0 0 30px rgba(0,212,255,0.05);
+  position:relative;z-index:1;
+}
+
+.hero-eyebrow{
+  font-size:0.78rem;
+  color:var(--soft);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  display:block;
+}
+.hero h1{
+  font-size:clamp(3.5rem,9vw,6.5rem);
+  font-weight:700;
+  line-height:0.95;
+  letter-spacing:-0.01em;
+  color:var(--text);
+  text-shadow:0 0 60px rgba(0,212,255,0.25);
+  margin-bottom:16px;
+}
+.hero h1 span{color:var(--e);}
+.hero-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1.1rem,2.5vw,1.5rem);
+  color:rgba(232,237,248,0.7);
+  margin-bottom:10px;
+}
+.hero-years{
+  font-size:0.75rem;
+  color:var(--soft);
+  letter-spacing:0.12em;
+  margin-bottom:36px;
+}
+.hero-scroll{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:0.72rem;color:var(--soft);letter-spacing:0.06em;
+  animation:floatY 2.5s ease-in-out infinite;
+}
+@keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+.scroll-line{
+  width:1px;height:50px;
+  background:linear-gradient(180deg,var(--e),transparent);
+}
+
+/* ===================== COMMON ===================== */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px;}
+.section-eye{
+  display:block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.7rem;
+  color:var(--e);
+  letter-spacing:0.1em;
+  margin-bottom:10px;
+}
+.section-h{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:600;
+  margin-bottom:8px;
+  line-height:1.1;
+}
+.section-sub{
+  color:var(--soft);
+  font-size:1rem;
+  margin-bottom:44px;
+}
+
+/* ===================== BIO ===================== */
+.bio{
+  position:relative;z-index:1;
+  padding:100px 24px;
+  background:linear-gradient(180deg,var(--bg),var(--navy));
+}
+.bio-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:56px;
+  align-items:start;
+}
+.bio-text p{
+  color:rgba(232,237,248,0.78);
+  margin-bottom:18px;
+  font-size:1.02rem;
+  line-height:1.8;
+}
+.bio-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.stat-box{
+  background:rgba(0,212,255,0.04);
+  border:1px solid rgba(0,212,255,0.12);
+  border-radius:12px;
+  padding:20px 16px;
+  text-align:center;
+  transition:border-color .25s,transform .25s;
+}
+.stat-box:hover{border-color:var(--e);transform:translateY(-3px);}
+.stat-num{
+  display:block;
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;
+  font-weight:700;
+  color:var(--e);
+  line-height:1;
+  margin-bottom:4px;
+}
+.stat-lbl{font-size:0.75rem;color:var(--soft);}
+
+/* ===================== QUOTE ===================== */
+.quote-section{
+  position:relative;z-index:1;
+  padding:80px 24px;
+  background:var(--navy);
+  border-top:1px solid rgba(0,212,255,0.08);
+  border-bottom:1px solid rgba(0,212,255,0.08);
+  overflow:hidden;
+}
+.quote-section::before{
+  content:"";
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,255,0.04),transparent 70%);
+  pointer-events:none;
+}
+blockquote{
+  max-width:780px;margin:0 auto;
+  font-size:clamp(1.4rem,3vw,2.1rem);
+  font-style:italic;
+  font-weight:400;
+  line-height:1.55;
+  color:var(--text);
+  text-align:center;
+  position:relative;
+  padding:0 56px;
+}
+blockquote::before,blockquote::after{
+  font-family:'Cormorant Garamond',serif;
+  font-size:7rem;
+  color:var(--e);
+  opacity:0.2;
+  position:absolute;
+  line-height:1;
+}
+blockquote::before{content:'"';top:-20px;left:0;}
+blockquote::after{content:'"';bottom:-50px;right:0;}
+.q-attr{
+  text-align:center;
+  margin-top:32px;
+  font-size:0.82rem;
+  color:var(--soft);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.q-attr::before{
+  content:"— ";
+}
+
+/* ===================== TIMELINE ===================== */
+.timeline-section{
+  position:relative;z-index:1;
+  padding:100px 24px;
+  background:linear-gradient(180deg,var(--navy),var(--bg));
+}
+.timeline{position:relative;margin-top:16px;}
+.t-line{
+  position:absolute;
+  left:0;top:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,var(--e),rgba(0,212,255,0.05));
+}
+.t-items{padding-left:32px;}
+.t-item{
+  position:relative;
+  margin-bottom:44px;
+  padding-left:16px;
+}
+.t-item::before{
+  content:"";
+  position:absolute;
+  left:-40px;top:8px;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--e);
+  box-shadow:0 0 12px var(--e),0 0 24px rgba(0,212,255,0.4);
+}
+.t-item:hover .t-card{border-color:rgba(0,212,255,0.3);}
+.t-card{
+  background:rgba(0,212,255,0.03);
+  border:1px solid rgba(0,212,255,0.1);
+  border-radius:12px;
+  padding:22px 24px;
+  transition:border-color .25s,transform .2s;
+}
+.t-item:hover .t-card{transform:translateX(4px);}
+.t-year{
+  font-size:0.72rem;
+  color:var(--e);
+  letter-spacing:0.1em;
+  margin-bottom:6px;
+  display:block;
+}
+.t-card h3{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:1.05rem;
+  margin-bottom:8px;
+  color:var(--text);
+}
+.t-card p{font-size:0.92rem;color:rgba(232,237,248,0.72);line-height:1.7;}
+
+/* ===================== ACHIEVEMENTS ===================== */
+.achievements{
+  position:relative;z-index:1;
+  padding:100px 24px;
+  background:var(--navy);
+}
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.a-card{
+  background:var(--card);
+  border:1px solid rgba(0,212,255,0.1);
+  border-radius:14px;
+  padding:26px 20px;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+  position:relative;
+  overflow:hidden;
+}
+.a-card::after{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--e),transparent);
+  opacity:0;
+  transition:opacity .3s;
+}
+.a-card:hover{
+  border-color:rgba(0,212,255,0.3);
+  transform:translateY(-5px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.4),0 0 0 1px rgba(0,212,255,0.1);
+}
+.a-card:hover::after{opacity:1;}
+.a-icon{
+  font-size:2rem;
+  margin-bottom:14px;
+  display:block;
+  filter:drop-shadow(0 0 8px rgba(0,212,255,0.4));
+}
+.a-card h3{
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:0.95rem;
+  margin-bottom:8px;
+  color:var(--text);
+}
+.a-card p{font-size:0.83rem;color:var(--soft);line-height:1.65;}
+
+/* ===================== CLOSING QUOTE ===================== */
+.closing{
+  position:relative;z-index:1;
+  padding:80px 24px;
+  background:var(--bg);
+  text-align:center;
+}
+.closing-inner{max-width:680px;margin:0 auto;}
+.closing h2{
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:20px;
+  color:var(--text);
+}
+.closing p{color:var(--soft);line-height:1.75;margin-bottom:14px;}
+
+/* ===================== FOOTER ===================== */
+footer{
+  position:relative;z-index:1;
+  background:var(--navy);
+  border-top:1px solid rgba(0,212,255,0.08);
+  padding:36px 24px;
+  text-align:center;
+}
+.f-line{
+  display:block;width:60px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--e),transparent);
+  margin:0 auto 20px;
+}
+footer p{font-size:0.8rem;color:var(--soft);}
+footer strong{color:var(--text);}
+
+/* ===================== REVEAL ===================== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* ===================== RESPONSIVE ===================== */
+@media(max-width:760px){
+  .bio-grid{grid-template-columns:1fr;}
+  .cards-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:500px){
+  .cards-grid{grid-template-columns:1fr;}
+  blockquote{padding:0 20px;font-size:1.2rem;}
+  blockquote::before,blockquote::after{font-size:4rem;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+  .reveal{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="canvas"></canvas>
+
+<!-- =================== HERO =================== -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="oibsip-badge"><span class="dot"></span>OIBSIP · WEB DEV · LEVEL 2 · TASK 2</span>
+    <div class="portrait-wrap">
+      <div class="portrait-ring"></div>
+      <div class="portrait-ring2"></div>
+      <div class="portrait-inner">⚡</div>
+    </div>
+    <span class="hero-eyebrow mono">10 JULY 1856 — 7 JANUARY 1943</span>
+    <h1>Nikola<br><span>Tesla</span></h1>
+    <p class="hero-tagline">The Man Who Lit the World</p>
+    <p class="hero-years mono">INVENTOR · ENGINEER · VISIONARY</p>
+    <div class="hero-scroll">
+      <span class="mono">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== BIO =================== -->
+<section class="bio reveal">
+  <div class="wrap">
+    <div class="bio-grid">
+      <div class="bio-text">
+        <span class="section-eye mono">01 / BIOGRAPHY</span>
+        <h2 class="section-h">Who Was<br>Nikola Tesla?</h2>
+        <p>Nikola Tesla was a Serbian-American inventor, electrical engineer, and futurist whose contributions to the design of the modern alternating current (AC) electricity supply system changed the course of human civilisation. Born on 10 July 1856 in Smiljan, in what is now Croatia, he displayed a remarkable aptitude for mathematics and physics from childhood.</p>
+        <p>After working briefly for Thomas Edison — before their famous falling-out over AC vs. DC power — Tesla partnered with George Westinghouse and triumphed in the legendary "War of Currents," establishing AC as the standard that powers the entire world to this day.</p>
+        <p>Tesla died penniless and largely forgotten in a New York hotel room in 1943. History has since recognised him as one of the greatest inventors and visionaries who ever lived — a man whose ideas about wireless communication, free energy, and resonance were centuries ahead of their time.</p>
+      </div>
+      <div class="bio-stats">
+        <div class="stat-box">
+          <span class="stat-num">300+</span>
+          <span class="stat-lbl">Patents Held</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">86</span>
+          <span class="stat-lbl">Years of Life</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">1856</span>
+          <span class="stat-lbl">Year of Birth</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">∞</span>
+          <span class="stat-lbl">Legacy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== QUOTE 1 =================== -->
+<div class="quote-section reveal">
+  <blockquote>
+    The present is theirs; the future, for which I really worked, is mine.
+  </blockquote>
+  <p class="q-attr mono">Nikola Tesla</p>
+</div>
+
+<!-- =================== TIMELINE =================== -->
+<section class="timeline-section reveal">
+  <div class="wrap">
+    <span class="section-eye mono">02 / TIMELINE</span>
+    <h2 class="section-h">A Life of<br>Discovery</h2>
+    <p class="section-sub">Eight milestones that changed history.</p>
+    <div class="timeline">
+      <div class="t-line"></div>
+      <div class="t-items">
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1856</span>
+            <h3>Born in Smiljan, Croatia</h3>
+            <p>Tesla was born into a Serbian family. From childhood he displayed a photographic memory, the ability to perform calculus mentally, and an uncanny gift for visualising machines before building them.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1882</span>
+            <h3>The Vision of the Rotating Magnetic Field</h3>
+            <p>While walking in a Budapest park, Tesla had a sudden vision of a rotating magnetic field — the foundational principle of AC power. He sketched the design in the dirt with a stick, and the induction motor was born.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1884</span>
+            <h3>Arrives in America, Works for Edison</h3>
+            <p>Tesla emigrated to the United States with four cents in his pocket and a letter of introduction to Thomas Edison. Their working relationship quickly soured over fundamental disagreements about AC versus DC power.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1888</span>
+            <h3>Partnership with Westinghouse — The War of Currents</h3>
+            <p>Tesla sold his AC motor patents to George Westinghouse. Edison launched a vicious public campaign against AC, even electrocuting animals to "prove" it was dangerous. Tesla and Westinghouse ultimately prevailed.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1893</span>
+            <h3>Illuminating the Chicago World's Fair</h3>
+            <p>Tesla and Westinghouse powered the entire Chicago World's Columbian Exposition with AC electricity — a stunning public demonstration witnessed by 27 million people that settled the War of Currents once and for all.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1899</span>
+            <h3>Colorado Springs — Reaching for Space</h3>
+            <p>Tesla built a massive experimental station generating millions of volts. He lit 200 lamps wirelessly from 40 km away and claimed to have received signals from outer space — decades before radio astronomy was conceived.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1901</span>
+            <h3>Wardenclyffe Tower — Wireless Power for the World</h3>
+            <p>Tesla began his most ambitious project: a tower designed to transmit free wireless electricity and communications to the entire globe. Funding collapsed under JP Morgan's pressure, and the unfinished tower was demolished in 1917.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-card">
+            <span class="t-year mono">1943</span>
+            <h3>Death & Eternal Legacy</h3>
+            <p>Tesla died alone in Room 3327 of the New Yorker Hotel. The SI unit of magnetic flux density — the Tesla (T) — was named in his honour in 1960. Today, the world's leading electric car company bears his name.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== ACHIEVEMENTS =================== -->
+<section class="achievements reveal">
+  <div class="wrap">
+    <span class="section-eye mono">03 / ACHIEVEMENTS</span>
+    <h2 class="section-h">The Inventions<br>That Power Today</h2>
+    <p class="section-sub">Tesla's legacy is embedded in every piece of modern technology.</p>
+    <div class="cards-grid">
+      <div class="a-card">
+        <span class="a-icon">⚡</span>
+        <h3>AC Power System</h3>
+        <p>Tesla's alternating current system is the global standard for electrical transmission — used in every home, hospital, and factory on Earth.</p>
+      </div>
+      <div class="a-card">
+        <span class="a-icon">📡</span>
+        <h3>Radio Technology</h3>
+        <p>Tesla demonstrated wireless signal transmission in 1893, predating Marconi. The US Supreme Court ruled in Tesla's favour in 1943 — the same year he died.</p>
+      </div>
+      <div class="a-card">
+        <span class="a-icon">🔄</span>
+        <h3>Induction Motor</h3>
+        <p>The AC induction motor Tesla invented in 1887 powers electric vehicles, industrial machines, and household appliances used by billions worldwide today.</p>
+      </div>
+      <div class="a-card">
+        <span class="a-icon">🌩️</span>
+        <h3>Tesla Coil</h3>
+        <p>Invented in 1891, the Tesla coil is used in radio technology, early television, medical devices, and remains a staple of science education globally.</p>
+      </div>
+      <div class="a-card">
+        <span class="a-icon">💡</span>
+        <h3>Fluorescent Lighting</h3>
+        <p>Tesla developed and demonstrated fluorescent bulbs decades before they were commercialised, even creating glowing neon signs at the 1893 World's Fair.</p>
+      </div>
+      <div class="a-card">
+        <span class="a-icon">🤖</span>
+        <h3>Remote Control & Robotics</h3>
+        <p>In 1898 Tesla publicly demonstrated the world's first radio-controlled vehicle — a miniature boat — planting the seed for modern robotics and drones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== CLOSING =================== -->
+<div class="quote-section reveal">
+  <blockquote>
+    If you want to find the secrets of the universe, think in terms of energy, frequency and vibration.
+  </blockquote>
+  <p class="q-attr mono">Nikola Tesla</p>
+</div>
+
+<section class="closing reveal">
+  <div class="closing-inner">
+    <span class="section-eye mono" style="text-align:center;display:block;">04 / LEGACY</span>
+    <h2>A Mind<br>Ahead of Time</h2>
+    <p>Nikola Tesla lived and died as a misunderstood genius — robbed of credit, robbed of funding, robbed of the recognition he deserved. Yet every time you switch on a light, charge your phone, or drive an electric car, you are using technology that traces its roots directly back to him.</p>
+    <p>His life is a reminder that the greatest ideas are rarely celebrated in their own time. Tesla did not work for money or fame. He worked, as he said, for the future — and the future turned out to be ours.</p>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <span class="f-line"></span>
+  <p>A tribute to <strong>Nikola Tesla</strong> — The man who gave the world its light.</p>
+  <br>
+  <p style="margin-top:8px;">Built by <strong>Jagruti Jiralikar</strong> &nbsp;·&nbsp; OIBSIP Web Development Internship &nbsp;·&nbsp; Level 2 · Task 2</p>
+</footer>
+
+<script>
+// ============ PARTICLE CANVAS ============
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], arcs = [];
+
+function resize(){
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Particles
+class Particle{
+  constructor(){this.reset();}
+  reset(){
+    this.x = Math.random()*W;
+    this.y = Math.random()*H;
+    this.r = Math.random()*1.4+0.3;
+    this.vx = (Math.random()-0.5)*0.3;
+    this.vy = (Math.random()-0.5)*0.3;
+    this.a = Math.random()*0.5+0.1;
+    this.life = Math.random()*300+200;
+    this.age = 0;
+  }
+  update(){
+    this.x += this.vx; this.y += this.vy; this.age++;
+    if(this.age>this.life||this.x<0||this.x>W||this.y<0||this.y>H) this.reset();
+  }
+  draw(){
+    const fade = Math.sin((this.age/this.life)*Math.PI);
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(0,212,255,${this.a*fade})`;
+    ctx.fill();
+  }
+}
+
+// Electric arc
+class Arc{
+  constructor(){this.reset();}
+  reset(){
+    this.x1=Math.random()*W; this.y1=Math.random()*H;
+    this.x2=this.x1+(Math.random()-0.5)*200;
+    this.y2=this.y1+(Math.random()-0.5)*200;
+    this.life=20+Math.random()*30;
+    this.age=0;
+    this.points=this.buildZigzag();
+  }
+  buildZigzag(){
+    const pts=[{x:this.x1,y:this.y1}];
+    const steps=4+Math.floor(Math.random()*5);
+    for(let i=1;i<steps;i++){
+      const t=i/steps;
+      const mx=this.x1+(this.x2-this.x1)*t;
+      const my=this.y1+(this.y2-this.y1)*t;
+      pts.push({x:mx+(Math.random()-0.5)*40,y:my+(Math.random()-0.5)*40});
+    }
+    pts.push({x:this.x2,y:this.y2});
+    return pts;
+  }
+  update(){this.age++;if(this.age>this.life)this.reset();}
+  draw(){
+    const fade=1-this.age/this.life;
+    ctx.beginPath();
+    ctx.moveTo(this.points[0].x,this.points[0].y);
+    for(let i=1;i<this.points.length;i++) ctx.lineTo(this.points[i].x,this.points[i].y);
+    ctx.strokeStyle=`rgba(0,212,255,${0.15*fade})`;
+    ctx.lineWidth=0.8;
+    ctx.shadowBlur=6;
+    ctx.shadowColor='rgba(0,212,255,0.4)';
+    ctx.stroke();
+    ctx.shadowBlur=0;
+  }
+}
+
+// init
+for(let i=0;i<120;i++) particles.push(new Particle());
+for(let i=0;i<6;i++) arcs.push(new Arc());
+
+// Connections
+function drawConnections(){
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x;
+      const dy=particles[i].y-particles[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x,particles[i].y);
+        ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle=`rgba(0,212,255,${0.06*(1-d/90)})`;
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw();});
+  drawConnections();
+  arcs.forEach(a=>{a.update();a.draw();});
+  requestAnimationFrame(animate);
+}
+animate();
+
+// Occasionally spark a new arc
+setInterval(()=>{
+  const i = Math.floor(Math.random()*arcs.length);
+  arcs[i].reset();
+}, 800);
+
+// ============ SCROLL REVEAL ============
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
+  });
+},{threshold:0.1});
+reveals.forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>
