@@ -20,3 +20,5 @@ HTML5, CSS3, JavaScript (Vanilla)
 
 ## How to View
 Open index.html in any browser.
+<img width="1366" height="766" alt="image" src="https://github.com/user-attachments/assets/87444aa9-afe5-419a-989a-a6e2ed95433e" />
+<img width="1366" height="766" alt="image" src="https://github.com/user-attachments/assets/7b0f18dc-c35b-42dc-90b6-7eccabc7538c" />
