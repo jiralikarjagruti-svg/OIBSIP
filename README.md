@@ -1,24 +1,23 @@
-# Calculator — Jagruti Jiralikar
-A fully functional browser-based calculator built as part of the OIBSIP Web Development Internship (Level 2 - Task 1).
+# OIBSIP — Web Development & Designing Internship
+## Jagruti Jiralikar | B.Tech CSE | MIT Academy of Engineering, Pune
+
+This repository contains all my task submissions for the Oasis Infobyte Web Development & Designing Internship.
+
+## Level 1 Tasks
+- WebDev-L1-LandingPage — Static landing page (Swaply)
+- WebDev-L1-PersonalPortfolio — Personal portfolio website
+- WebDev-L1-TemperatureConverter — Temperature converter tool
+
+## Level 2 Tasks
+- WebDev-L2-Calculator — Browser-based calculator
+- WebDev-L2-TributePage — Nikola Tesla tribute page
+- WebDev-L2-ToDoApp — TaskFlow to-do web app
+- WebDev-L2-LoginSystem — AuthVault login authentication system
 
 ## Tech Stack
-HTML5, CSS3, JavaScript (Vanilla)
+HTML5 | CSS3 | JavaScript (Vanilla) | Web Crypto API
 
-## Features
-- Display screen showing current input and result
-- Numeric buttons (0–9) and decimal point
-- Operator buttons: addition (+), subtraction (−), multiplication (×), division (÷)
-- Equals (=) button to evaluate expression
-- Clear (C) button to reset
-- Backspace (⌫) button to delete last character
-- Division by zero error handling
-- Operator chaining support
-- Animated result display with ripple effects
-- Keyboard support
-- CSS Grid layout
-- Fully responsive
-
-## How to View
-Open index.html in any browser.
-<img width="1366" height="766" alt="image" src="https://github.com/user-attachments/assets/87444aa9-afe5-419a-989a-a6e2ed95433e" />
-<img width="1366" height="766" alt="image" src="https://github.com/user-attachments/assets/7b0f18dc-c35b-42dc-90b6-7eccabc7538c" />
+## Internship Details
+Organization: Oasis Infobyte (OIBSIP)
+Track: Web Development & Designing
+Duration: 5 July — 15 August 2026
